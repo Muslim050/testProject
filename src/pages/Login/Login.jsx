@@ -55,7 +55,7 @@ function Login() {
           guest: '/login',
           advertising_agency: '/order',
         }
-        toast.success('Вы успешно вошли в систему Blogger exchange!')
+        toast.success('Вы успешно вошли в систему Blogger Bank!')
 
         const redirectRoute = role ? routesByRole[role] : routesByRole.guest
         // Анимация исчезновения элементов перед навигацией
@@ -148,7 +148,7 @@ function Login() {
                   ref={mainSubtitleRef}
                   className="text-2xl	font-normal	text-white"
                 >
-                  Blogger exchange - Платформа Видеорекламы в
+                  Blogger Bank - Платформа Видеорекламы в
                   <span className="text-white ml-1">
                     You
                     <span className="bg-red-600 p-0.5 rounded-[10px] font-semibold">
@@ -217,7 +217,7 @@ function Login() {
                   Вход в систему
                 </p>
                 <h1 className="text-[32px] font-bold text-white">
-                  Blogger exchange
+                  Blogger Bank
                 </h1>
               </div>
               <div className="relative">

@@ -74,7 +74,7 @@ const PreLoad = ({ onComplete }) => {
             }}
             className="text-[32px] font-bold pt-3 text-center"
           >
-            Blogger exchange
+            Blogger Bank
           </div>
         </div>
       </div>

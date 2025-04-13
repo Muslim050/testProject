@@ -96,7 +96,7 @@ const ContactForm = () => {
                 className="w-[27px] h-[30px]"
                 alt=""
               />{' '}
-              Blogger exchange
+              Blogger Bank
             </div>
             <div className="flex flex-col justify-center items-center mt-4 gap-3">
               <p className="text-[24px] text-white font-medium">

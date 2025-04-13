@@ -7,6 +7,7 @@ import LeftForm from './LeftForm'
 import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
 gsap.registerPlugin(ScrollTrigger)
 
 function SeventhPage() {
@@ -111,19 +112,20 @@ function SeventhPage() {
     <section className="overflow-hidden" id="Монетизировать">
       <div className=" ">
         {/* max-w-[900px] w-full m-auto */}
-        <div className="relative  flex-col justify-between  py-20	   overflow-hidden" style={{
-          background: "radial-gradient(49.2% 63.45% at 50% 45.62%, rgba(21, 61, 204, 0.08) 14.36%, rgba(5, 5, 11, 0) 100%), radial-gradient(47.78% 64.92% at 50% 44.06%, rgba(216, 236, 248, 0.04) 0%, rgba(152, 192, 239, 0.01) 50%, rgba(5, 5, 11, 0) 100%",
-          filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))"
-        }}>
+        <div
+          className="relative  flex-col justify-between  py-20	   overflow-hidden"
+          style={{
+            background:
+              'radial-gradient(49.2% 63.45% at 50% 45.62%, rgba(21, 61, 204, 0.08) 14.36%, rgba(5, 5, 11, 0) 100%), radial-gradient(47.78% 64.92% at 50% 44.06%, rgba(216, 236, 248, 0.04) 0%, rgba(152, 192, 239, 0.01) 50%, rgba(5, 5, 11, 0) 100%',
+            filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))',
+          }}
+        >
           {/*<GradientBGSvg className="absolute top-0 left-0 w-[100%] h-full -z-[5px]" />*/}
           <StarsSSSvg className="absolute top-0 left-0 w-[100%] h-full -z-[5px]" />
           <SetkaSvg className="absolute top-0 left-0 w-[100%] h-full -z-[5px]" />
           <div className="max-w-[1240px] w-full mx-auto px-4 py-28">
             <div ref={phoneLeftCart}>
-              <PageTitle
-                topTitle={'Свяжитесь с нами'}
-                title={'Развивайте свой бизнес с нами'}
-              />
+              <PageTitle title={'Ускорьте рост вашего бизнеса с нами'} />
             </div>
             <div className="flex justify-center" ref={phoneRightCart}>
               <Tabs
@@ -147,7 +149,7 @@ function SeventhPage() {
                     Для рекламодателей
                   </TabsTrigger>
                   <TabsTrigger value="channel" className={m.tabs_trigger}>
-                    Для каналов
+                    Для блогеров
                   </TabsTrigger>
                 </TabsList>
                 <div ref={contentRef}>

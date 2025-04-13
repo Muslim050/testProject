@@ -165,7 +165,7 @@ const Header = () => {
                 window.location.reload()
               }}
             >
-              Blogger exchange
+              Blogger Bank
             </div>
             <a
               href="#ThirdPage"

@@ -1,25 +1,22 @@
-import { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Video from './VideoBG.mp4'
 import { StarsSSSvg } from '@/assets/Site/site-svg.jsx'
-import PageTitle from '../module/PageTitle'
 import m from './FourthPage.module.scss'
-import image1 from '@/assets/FourthPage/1.png'
-import image2 from '@/assets/FourthPage/2.png'
-import image3 from '@/assets/FourthPage/3.png'
-import image4 from '@/assets/FourthPage/4.png'
-import image5 from '@/assets/FourthPage/5.png'
-import image6 from '@/assets/FourthPage/6.png'
-import image7 from '@/assets/FourthPage/7.png'
-import image8 from '@/assets/FourthPage/8.png'
-import image9 from '@/assets/FourthPage/9.png'
-import image10 from '@/assets/FourthPage/10.png'
-import image11 from '@/assets/FourthPage/11.png'
-import image12 from '@/assets/FourthPage/12.png'
-import image13 from '@/assets/FourthPage/13.png'
-import image14 from '@/assets/FourthPage/14.png'
-import image15 from '@/assets/FourthPage/15.png'
+
+import image1 from './imm/1.png'
+import image2 from './imm/2.png'
+import image3 from './imm/3.png'
+import image4 from './imm/4.png'
+import image5 from './imm/5.png'
+import image6 from './imm/6.png'
+import image7 from './imm/7.png'
+import image8 from './imm/8.png'
+import image9 from './imm/9.png'
+import image10 from './imm/10.png'
+import image11 from './imm/11.png'
+import image12 from './imm/12.png'
 
 const imagesData = [
   { id: 1, image: image1 },
@@ -34,70 +31,85 @@ const imagesData = [
   { id: 10, image: image10 },
   { id: 11, image: image11 },
   { id: 12, image: image12 },
-  { id: 13, image: image13 },
-  { id: 14, image: image14 },
-  { id: 15, image: image15 },
 ]
 
 gsap.registerPlugin(ScrollTrigger)
 
 const FourthPage = () => {
   const containerRef = useRef(null)
+  const textRef = useRef(null)
+
   useEffect(() => {
-    const container = containerRef.current
+    // Устанавливаем начальное состояние для текстового блока
+    if (textRef.current) {
+      gsap.set(textRef.current, { opacity: 0, y: 50 })
+    }
 
-    // Отключение анимаций для мобильных устройств
-    // if (window.innerWidth < 768) return;
-
-    if (container) {
-      // Последовательное появление карточек
-      ScrollTrigger.batch('.card', {
-        onEnter: (batch) => {
-          gsap.to(batch, {
+    // Batch-анимация карточек и одновременно анимация текста
+    ScrollTrigger.batch('.card', {
+      onEnter: (batch) => {
+        gsap.to(batch, {
+          opacity: 1,
+          y: 0,
+          stagger: 0.2,
+          duration: 0.8,
+          ease: 'power2.out',
+        })
+        // Анимация текста при появлении карточек
+        if (textRef.current) {
+          gsap.to(textRef.current, {
             opacity: 1,
             y: 0,
-            stagger: 0.2, // Интервал между карточками
             duration: 0.8,
             ease: 'power2.out',
           })
-        },
-        onLeaveBack: (batch) => {
-          gsap.to(batch, {
+        }
+      },
+      onLeaveBack: (batch) => {
+        gsap.to(batch, {
+          opacity: 0,
+          y: 200,
+          stagger: 0.2,
+          duration: 0.8,
+          ease: 'power2.in',
+        })
+        // Обратная анимация для текста
+        if (textRef.current) {
+          gsap.to(textRef.current, {
             opacity: 0,
-            y: 200, // Возвращение карточек вниз
-            stagger: 0.2,
+            y: 50,
             duration: 0.8,
             ease: 'power2.in',
           })
+        }
+      },
+      start: 'top 80%',
+      end: 'bottom 20%',
+    })
+
+    // Дополнительный timeline для видео и других анимаций (если требуется)
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: '.sectionFourthBlue',
+          start: 'top top',
+          end: '+=200%',
+          scrub: 1,
+          pin: true,
         },
-        start: 'top 80%', // Когда карточки входят в область видимости
-        end: 'bottom 20%', // Когда карточки покидают область видимости
       })
+      .fromTo(
+        '.dog-1',
+        { opacity: 0, scale: 6 },
+        { opacity: 1, scale: 1, duration: 2, ease: 'power1.out' },
+      )
+      .to('.dog-2', { opacity: 1, duration: 2, ease: 'power1.out' })
 
-      // Видео и основные анимации
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: '.sectionFourthBlue',
-            start: 'top top',
-            end: '+=200%',
-            scrub: 1,
-            pin: true,
-          },
-        })
-        .fromTo(
-          '.dog-1',
-          { opacity: 0, scale: 6 },
-          { opacity: 1, scale: 1, duration: 2, ease: 'power1.out' },
-        )
-        .to('.dog-2', { opacity: 1, duration: 2, ease: 'power1.out' })
-    }
-
+    // Очистка при размонтировании компонента
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
     }
   }, [])
-
   return (
     <section className="sectionFourth sectionFourthBlue">
       {/* Video background */}
@@ -111,7 +123,6 @@ const FourthPage = () => {
         style={{ paddingBottom: '10px' }}
         className="absolute top-0 left-0 w-full h-full object-cover "
       />
-      <PageTitle title="По рекламе для успеха на YouTube" />
 
       <div className="dog-1 absolute w-full h-full">
         {/*<GradientBGSvg >*/}
@@ -134,14 +145,30 @@ const FourthPage = () => {
           className="absolute top-0 left-0 w-full h-full object-cover "
         ></video>
         <div className="mix-blend-multiply m-auto font-black uppercase absolute top-0 left-0 w-full h-full text-white bg-[#05060a] text-[35px] flex justify-center flex-col items-center ">
-          Blogger exchange
+          Blogger Bank
         </div>
       </div>
+      <h2
+        ref={textRef}
+        style={{
+          background:
+            'linear-gradient(360deg, #FFFFFF 16.15%, rgba(255, 255, 255, 0.3) 140.1%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          textFillColor: 'transparent',
+          letterSpacing: '-0.03em',
 
+          textShadow: '0px 4px 20px rgba(255, 255, 255, 0.25)',
+        }}
+        className={`animated-element text-[35px] md:text-[40px] lg:text-[60px] pt-3  text-center flex h-full mt-20`}
+      >
+        Бренды, выбравшие нас
+      </h2>
       {/* Cards with ScrollTrigger */}
+
       <div
         ref={containerRef}
-        // className="dog-2 imgFourth grid grid-cols-3 md:grid-cols-2 gap-4 p-4 max-w-[1240px] w-full m-auto"
         className="dog-2 imgFourth max-w-[1240px] w-full m-auto"
       >
         <div className={m.wrapperCard}>
@@ -164,7 +191,7 @@ const FourthPage = () => {
                 loading="lazy"
                 src={item.image}
                 alt={`Image ${item.id}`}
-                className="w-auto h-auto max-w-[150px] object-cover"
+                className="w-auto h-auto max-w-[200px]  object-cover"
               />
             </div>
           ))}

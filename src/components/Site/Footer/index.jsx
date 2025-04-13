@@ -82,7 +82,7 @@ function Footer() {
                 className="w-[27px] h-[30px]"
                 alt=""
               />{' '}
-              Blogger exchange
+              Blogger Bank
             </div>
             <div className="mt-5">
               Реклама, которая увеличивает ценность вашего бренда
@@ -121,9 +121,7 @@ function Footer() {
         </div>
 
         <div className="flex justify-center md:justify-between">
-          <div className="text-base text-[#ffffff78] ">
-            2024 Blogger exchange
-          </div>
+          <div className="text-base text-[#ffffff78] ">2024 Blogger Bank</div>
           <div className="text-base text-[#ffffff78] hidden md:block">
             Все права защищены
           </div>

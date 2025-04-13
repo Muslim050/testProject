@@ -5,14 +5,13 @@ import { SetkaSvg, StarsSSSvg } from '@/assets/Site/site-svg.jsx'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import HeadeYouTube from './HeadeYouTube.png'
-import video2 from '@/assets/Site/FirstPage/Video/22.mp4'
-import video9 from '@/assets/Site/FirstPage/Video/1011.mp4'
-import video1 from '@/assets/Site/FirstPage/Video/11.mp4'
 import m from './FifthPage.module.scss'
-import video3 from '@/assets/Site/FirstPage/Video/44.mp4'
-import video11 from '@/assets/Site/FirstPage/Video/1012.mp4'
-import video4 from '@/assets/Site/FirstPage/Video/55.mp4'
 import PageTitle from '../module/PageTitle'
+import img1 from './1.png'
+import img2 from './2.png'
+import img3 from './3.png'
+import img4 from './5.png'
+import Socials1 from './Socials1.jsx'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -21,7 +20,8 @@ function FifthPage() {
   const sectionRef = useRef(null)
   const triggerRef = useRef(null)
   const swiperRef = useRef()
-
+  const socials1 = useRef(null)
+  const socials2 = useRef(null)
   //section2
   const sectionMainTitle = useRef(null)
 
@@ -146,129 +146,39 @@ function FifthPage() {
                 loading="lazy"
                 src={HeadeYouTube}
                 alt=""
-                className="w-full rounded-t-[32px]"
+                className="w-full rounded-t-[32px] relative"
               />
+              <div className="absolute left-8 top-8">
+                <Socials1 socials1={socials1} socials2={socials2} />
+              </div>
             </div>
             <div className="py-5 flex flex-col gap-8 bg-black rounded-b-[32px] ">
               <div className="flex gap-4 justify-around flex-wrap">
                 <div className={`w-[400px] p-2 ${m.wrapperCard}`}>
-                  <video
-                    preload="none"
-                    src={video2}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-[400px] h-[220px] rounded-[14px]"
-                  ></video>
-                  <div className="pt-4">
-                    <div className="text-white text-[16px]">
-                      Coca - Cola Освежающий вкус в каждой капле
-                    </div>
-                    <div className="text-[#909090] text-[14px]">
-                      3м просмотров
-                    </div>
-                  </div>
+                  <img
+                    src={img1}
+                    className="w-[400px] h-[550px] rounded-[14px]"
+                  ></img>
                 </div>
                 <div className={`w-[400px] p-2 ${m.wrapperCard}`}>
-                  <video
-                    preload="none"
-                    src={video9}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-[400px] h-[220px] rounded-[14px]"
-                  ></video>{' '}
-                  <div className="pt-4">
-                    <div className="text-white text-[16px]">
-                      Honor 200 Рго инновации в каждом устройстве.
-                    </div>
-                    <div className="text-[#909090] text-[14px]">
-                      3м просмотров
-                    </div>
-                  </div>
+                  <img
+                    src={img2}
+                    className="w-[400px] h-[550px] rounded-[14px]"
+                  ></img>
                 </div>
               </div>
               <div className="flex gap-4 justify-around flex-wrap">
                 <div className={`w-[400px] p-2 ${m.wrapperCard}`}>
-                  <video
-                    preload="none"
-                    src={video1}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-[400px] h-[220px] rounded-[14px]"
-                  ></video>{' '}
-                  <div className="pt-4">
-                    <div className="text-white text-[16px]">
-                      Встречайте обновленый BYD Champion
-                    </div>
-                    <div className="text-[#909090] text-[14px]">
-                      3м просмотров
-                    </div>
-                  </div>
+                  <img
+                    src={img3}
+                    className="w-[400px] h-[550px] rounded-[14px]"
+                  ></img>
                 </div>
                 <div className={`w-[400px] p-2 ${m.wrapperCard}`}>
-                  <video
-                    preload="none"
-                    src={video3}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-[400px] h-[220px] rounded-[14px]"
-                  ></video>{' '}
-                  <div className="pt-4">
-                    <div className="text-white text-[16px]">
-                      Borjomi: природная чистота и свежесть грузинских
-                      источников.
-                    </div>
-                    <div className="text-[#909090] text-[14px]">
-                      3м просмотров
-                    </div>
-                  </div>
-                </div>{' '}
-              </div>
-              <div className="flex gap-4 justify-around flex-wrap">
-                <div className={`w-[400px] p-2 ${m.wrapperCard}`}>
-                  <video
-                    preload="none"
-                    src={video11}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-[400px] h-[220px] rounded-[14px]"
-                  ></video>{' '}
-                  <div className="pt-4">
-                    <div className="text-white text-[16px]">
-                      Cherry Tiggo Pro Max - автомобиль сполным приводом.
-                    </div>
-                    <div className="text-[#909090] text-[14px]">
-                      3м просмотров
-                    </div>
-                  </div>
-                </div>{' '}
-                <div className={`w-[400px] p-2 ${m.wrapperCard}`}>
-                  <video
-                    preload="none"
-                    src={video4}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-[400px] h-[220px] rounded-[14px]"
-                  ></video>{' '}
-                  <div className="pt-4">
-                    <div className="text-white text-[16px]">
-                      Artel искусство и инновации в каждом устройстве.
-                    </div>
-                    <div className="text-[#909090] text-[14px]">
-                      3м просмотров
-                    </div>
-                  </div>
+                  <img
+                    src={img4}
+                    className="w-[400px] h-[550px] rounded-[14px]"
+                  ></img>
                 </div>{' '}
               </div>
             </div>

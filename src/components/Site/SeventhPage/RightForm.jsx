@@ -100,13 +100,13 @@ function RightForm() {
                 className="w-[27px] h-[30px]"
                 alt=""
               />{' '}
-              Blogger exchange
+              Blogger Bank
             </div>
             <div className="flex flex-col justify-center items-center mt-4 gap-3">
               <p className="text-[24px] text-white font-medium">
                 Монетизировать контент
               </p>
-              <p className="text-[#6D768F] text-[14px]">Если вы канал</p>
+              <p className="text-[#6D768F] text-[14px]">Если вы блогер</p>
             </div>
             <div className="pt-6 flex flex-col gap-4">
               <input

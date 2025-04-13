@@ -424,7 +424,7 @@ const Nav = ({ links, isCollapsed, handleLogout }) => {
               <AlertDialogContent>
                 <AlertDialogHeader>
                   <AlertDialogTitle className="text-white">
-                    Выйти из системы Blogger exchange
+                    Выйти из системы Blogger Bank
                   </AlertDialogTitle>
                   <AlertDialogDescription className="text-white">
                     Вы точно хотите выйти?

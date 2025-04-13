@@ -16,11 +16,11 @@ gsap.registerPlugin(ScrollTrigger)
 
 const items = [
   {
-    title: 'Какие услуги предоставляет Blogger exchange?',
+    title: 'Какие услуги предоставляет Blogger Bank?',
     image: image1,
   },
   {
-    title: 'Blogger exchange поможет моему бизнесу достичь новых высот?.',
+    title: 'Blogger Bank поможет моему бизнесу достичь новых высот?.',
     image: image2,
   },
   {
@@ -28,7 +28,7 @@ const items = [
     image: image3,
   },
   {
-    title: 'Как можно начать сотрудничество с Blogger exchange?',
+    title: 'Как можно начать сотрудничество с Blogger Bank?',
     image: image4,
   },
   {
