@@ -61,14 +61,15 @@ const FirstTitleContainer = ({
           }}
           className={`animated-element text-[35px] md:text-[40px] lg:text-[60px] pt-3  text-center `}
         >
-          Единая Платформа Размещения OLV рекламы
+          Единая Платформа Блогеров для заказа OLV рекламы
         </h2>
 
         <p
           ref={paragraphRef}
           className={`flex-wrap justify-center text-slate-500 text-[12px] md:text-[15px] lg:text-[18px] py-3 text-center flex items-center`}
         >
-          Платформа блогеров и конверсией аудитории по модели CPA
+          Запусти оффер с нужным действием: регистрация, лид, покупка конверсия
+          по модели СPA
         </p>
       </div>
       <div className="relative sm:inline-block flex justify-center  gap-5 items-center ">

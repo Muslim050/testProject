@@ -34,7 +34,7 @@ function Site() {
           <FifthPage />
           <FifthPage2 />
           <FaqPage />
-          {/*<SeventhPage />*/}
+          <SeventhPage />
           <Footer />
           <ScrollToTopButton />
         </Suspense>

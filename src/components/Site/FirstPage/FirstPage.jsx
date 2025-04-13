@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import { useGSAP } from '@gsap/react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, Navigation } from 'swiper/modules'
+import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/pagination'
@@ -17,6 +17,7 @@ import Phonebg from '@/assets/Site/FirstPage/HandWithPhone.svg'
 import Gradient from '@/assets/Site/FirstPage/Gradient.png'
 
 import Socials from './module/Socials'
+import CartUnderVideo from './module/CartUnderVideo'
 import FirstTitleContainer from './module/FirstTitleContainer'
 import LeftRightCart from './module/LeftRightCart'
 import LazyVideo from './module/LazyVideo'
@@ -30,12 +31,12 @@ const FirstPage = () => {
   const swiperRef = useRef()
   const secondPageTextRef = useRef(null)
 
-  const phoneRightCart = useRef(null)
-  const phoneLeftCart = useRef(null)
-
   const [activeSlide, setActiveSlide] = useState(0)
+  const [slidesToShow, setSlidesToShow] = useState(4.95)
+  const [isSecondPage, setIsSecondPage] = useState(false)
 
   const firstRef = useRef(null)
+  const mediaQuery = window.matchMedia('(min-width: 768px)')
 
   useEffect(() => {
     gsap.from(firstRef.current, {
@@ -59,32 +60,34 @@ const FirstPage = () => {
     })
   }, [])
 
-  // //Анимация телефона
-  // useEffect(() => {
-  //   if (mediaQuery.matches) {
-  //     // Отключение сложных анимаций для мобильных
-  //     gsap.to(phoneRef.current, {
-  //       y: window.innerHeight - 10,
-  //       scale: 1,
-  //       opacity: 1,
-  //       ease: 'none',
-  //       scrollTrigger: {
-  //         trigger: '#second-page',
-  //         start: 'top bottom',
-  //         end: 'bottom bottom',
-  //         scrub: true,
-  //         onEnter: () => {
-  //           setSlidesToShow(4.95)
-  //         },
-  //         onLeaveBack: () => {
-  //           setSlidesToShow(4.95)
-  //         },
-  //       },
-  //     })
-  //   } else {
-  //     gsap.killTweensOf(phoneRef.current)
-  //   }
-  // }, [])
+  //Анимация телефона
+  useEffect(() => {
+    if (mediaQuery.matches) {
+      // Отключение сложных анимаций для мобильных
+      gsap.to(phoneRef.current, {
+        y: window.innerHeight - 10,
+        scale: 1,
+        opacity: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#second-page',
+          start: 'top bottom',
+          end: 'bottom bottom',
+          scrub: true,
+          onEnter: () => {
+            setSlidesToShow(4.95)
+            setIsSecondPage(true)
+          },
+          onLeaveBack: () => {
+            setSlidesToShow(4.95)
+            setIsSecondPage(false)
+          },
+        },
+      })
+    } else {
+      gsap.killTweensOf(phoneRef.current)
+    }
+  }, [])
 
   //Анимация появления телефона и слайдера
   useEffect(() => {
@@ -106,6 +109,16 @@ const FirstPage = () => {
     })
   }, [])
   //Анимация появления телефона и слайдера
+
+  useEffect(() => {
+    if (isSecondPage) {
+      gsap.fromTo(
+        '.mySwiper',
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 1 },
+      )
+    }
+  }, [isSecondPage])
 
   const cardRef = useRef(null)
   const sparkleRef = useRef(null)
@@ -266,29 +279,33 @@ const FirstPage = () => {
                         className={`flex items-center justify-center flex-col slide
                         ${
                           index === activeSlide
-                            ? 'border-0 mx-auto '
+                            ? isSecondPage
+                              ? 'firstBorder secondBorder shadow-inner bg-[#BACFF70A]'
+                              : 'border-0 mx-auto '
                             : 'firstBorder secondBorder shadow-inner bg-[#BACFF70A] '
                         }
                       `}
                       >
                         <LazyVideo src={slide.image} />
                       </div>
-                      {/*{isSecondPage ? null : (*/}
-                      {/*  <div*/}
-                      {/*    className={`absolute bottom-0 top-[115px] w-full */}
-                      {/*flex items-center justify-center slide`}*/}
-                      {/*  >*/}
-                      {/*    <div*/}
-                      {/*      className={`relative ${*/}
-                      {/*        index === activeSlide*/}
-                      {/*          ? ' h-full w-full'*/}
-                      {/*          : 'hidden'*/}
-                      {/*      }`}*/}
-                      {/*    >*/}
-                      {/*      <CartUnderVideo slide={slide} />*/}
-                      {/*    </div>*/}
-                      {/*  </div>*/}
-                      {/*)}*/}
+                      {isSecondPage ? null : (
+                        <div
+                          className={`absolute bottom-0 top-[115px] w-full 
+                      flex items-center justify-center slide
+                      ${index === activeSlide ? 'text-white' : 'hidden'}
+                    `}
+                        >
+                          <div
+                            className={`relative ${
+                              index === activeSlide
+                                ? ' h-full w-full'
+                                : 'hidden'
+                            }`}
+                          >
+                            <CartUnderVideo slide={slide} />
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </SwiperSlide>
                 ))}
@@ -306,7 +323,9 @@ const FirstPage = () => {
 
           <div
             ref={phoneRef}
-            className={`animated-element relative flex `}
+            className={`animated-element relative flex ${
+              isSecondPage && 'custom-1100:hidden'
+            }`}
             id="second-page"
           >
             <div
@@ -337,60 +356,60 @@ const FirstPage = () => {
               />
             </div>
 
-            {/*<div*/}
-            {/*  className={`fixed top-[135%] z-10 md:left-[183px] left-[164px]  transform -translate-x-1/2 w-full max-w-[1240px]`}*/}
-            {/*>*/}
-            {/*  <div*/}
-            {/*    className={`w-auto slider-container  ${*/}
-            {/*      isSecondPage && 'custom-1100:hidden'*/}
-            {/*    }`}*/}
-            {/*  >*/}
-            {/*    {isSecondPage && (*/}
-            {/*      <Swiper*/}
-            {/*        lazy={true}*/}
-            {/*        preloadImages={false}*/}
-            {/*        slidesPerView={1}*/}
-            {/*        spaceBetween={20}*/}
-            {/*        centeredSlides={true}*/}
-            {/*        navigation={true}*/}
-            {/*        pagination={{*/}
-            {/*          clickable: true,*/}
-            {/*        }}*/}
-            {/*        autoplay={{*/}
-            {/*          delay: 2500,*/}
-            {/*          disableOnInteraction: false,*/}
-            {/*        }}*/}
-            {/*        modules={[Pagination, Navigation, Autoplay]}*/}
-            {/*        className="mySwiper"*/}
-            {/*        onSlideChange={(swiper) => setActiveSlide(swiper.realIndex)}*/}
-            {/*      >*/}
-            {/*        {sliderData*/}
-            {/*          .filter((_, index) => index === activeSlide)*/}
-            {/*          .map((slide, index) => (*/}
-            {/*            <SwiperSlide key={slide.id}>*/}
-            {/*              <div className="relative md:w-[205px] w-[180px]  h-[300px]">*/}
-            {/*                <div className="flex items-center justify-center flex-col slide border-0 mx-auto">*/}
-            {/*                  <LazyVideo src={slide.image} />*/}
-            {/*                </div>*/}
-            {/*                <div*/}
-            {/*                  className={`absolute bottom-0 w-full*/}
-            {/*          flex items-center justify-center slide*/}
-            {/*         */}
-            {/*        `}*/}
-            {/*                >*/}
-            {/*                  <div*/}
-            {/*                    className={`relative  h-full w-full top-[-60px]`}*/}
-            {/*                  >*/}
-            {/*                    <CartUnderVideo slide={slide} />*/}
-            {/*                  </div>*/}
-            {/*                </div>*/}
-            {/*              </div>*/}
-            {/*            </SwiperSlide>*/}
-            {/*          ))}*/}
-            {/*      </Swiper>*/}
-            {/*    )}*/}
-            {/*  </div>*/}
-            {/*</div>*/}
+            <div
+              className={`fixed top-[135%] z-10 md:left-[183px] left-[164px]  transform -translate-x-1/2 w-full max-w-[1240px]`}
+            >
+              <div
+                className={`w-auto slider-container  ${
+                  isSecondPage && 'custom-1100:hidden'
+                }`}
+              >
+                {isSecondPage && (
+                  <Swiper
+                    lazy={true}
+                    preloadImages={false}
+                    slidesPerView={1}
+                    spaceBetween={20}
+                    centeredSlides={true}
+                    navigation={true}
+                    pagination={{
+                      clickable: true,
+                    }}
+                    autoplay={{
+                      delay: 2500,
+                      disableOnInteraction: false,
+                    }}
+                    modules={[Pagination, Navigation, Autoplay]}
+                    className="mySwiper"
+                    onSlideChange={(swiper) => setActiveSlide(swiper.realIndex)}
+                  >
+                    {sliderData
+                      .filter((_, index) => index === activeSlide)
+                      .map((slide, index) => (
+                        <SwiperSlide key={slide.id}>
+                          <div className="relative md:w-[205px] w-[180px]  h-[300px]">
+                            <div className="flex items-center justify-center flex-col slide border-0 mx-auto">
+                              <LazyVideo src={slide.image} />
+                            </div>
+                            <div
+                              className={`absolute bottom-0 w-full
+                      flex items-center justify-center slide
+                     
+                    `}
+                            >
+                              <div
+                                className={`relative  h-full w-full top-[-60px]`}
+                              >
+                                <CartUnderVideo slide={slide} />
+                              </div>
+                            </div>
+                          </div>
+                        </SwiperSlide>
+                      ))}
+                  </Swiper>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>
